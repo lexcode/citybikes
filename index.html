@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CityBikes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body data-ng-app="citybikes" data-ng-controller="map">
+    <div id="map"></div>
+
+    <div class="container-fluid">
+      <h1 id="map-title" class="lead">CityBikes</h1>
+
+      <div id="map-search" class="form-group">
+        <label for="search">
+          <i class="fa fa-search"></i>
+          Search location
+        </label>
+        <input list="search" class="form-control" data-ng-model="map.location" data-ng-change="map.search()">
+        <datalist id="search">
+          <option data-ng-repeat="item in map.locations | filter: map.location | orderBy: item.location.city | limitTo: 10" value="{{item.location.city}}" label="{{item.location.country}}">
+        </datalist>
+      </div>
+
+      <div id="map-info" data-ng-show="map.stations.length">
+        <h4 class="lead">
+          <i class="fa fa-map-marker"></i>
+          {{map.pointer.name}}
+        </h4>
+        <p>
+          <span data-ng-show="map.pointer.empty_slots<=0">No spaces available</span>
+          <span data-ng-hide="map.pointer.empty_slots<=0">{{map.pointer.empty_slots}} spaces available</span><br>
+          <span data-ng-show="map.pointer.free_bikes<=0">No bikes available</span>
+          <span data-ng-hide="map.pointer.free_bikes<=0">{{map.pointer.free_bikes}} bikes available</span>
+        </p>
+        <hr>
+        <h4 class="lead">
+          <i class="fa fa-clock-o" aria-hidden="true"></i>
+          Last Update
+        </h4>
+        <p class="map-date">
+            <span data-ng-hide="map.pointer.timestamp<=0">{{map.formatdate}}</span>
+        </p>
+      </div>
+    </div>
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDlQLRmKpTSV8VzmPMvEbH8WgFCxaWqb58&callback=initialize"
+    async defer></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
