@@ -2,4 +2,4 @@
 Citybikes
 
 ## Demo
-- <https://www.goouttoo.com/citybikes>
+- <https://citybikes-lexcode.wedeploy.io>
