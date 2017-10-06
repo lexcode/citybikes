@@ -5,8 +5,8 @@ citybikes.factory('environment', function(){
   return {
 
     // development environment
-    'www.goouttoo.com': {
-      app: 'www.goouttoo.com',
+    'citybikes-lexcode.wedeploy.io': {
+      app: 'citybikes-lexcode.wedeploy.io',
       api: 'https://api.citybik.es/v2/'
     },
 
